@@ -10,44 +10,58 @@
 <body class="bg-gray-100 flex items-center justify-center h-screen">
     <div class="bg-white shadow-md rounded-lg p-6 max-w-md w-full">
         <h1 class="text-2xl font-semibold text-gray-800 text-center mb-4">
-            TTS & Translation made effortless...
+            TTS & Translation made effortless....
         </h1>
 
-        <!-- Text Input -->
+        <!-- text input -->
         <textarea 
             class="w-full h-32 p-3 border border-gray-300 rounded-lg
-            focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+            focus:outline-none focus:ring-2 focus:ring-blue-500
+            resize-none"
             placeholder="Type your text here...."
         ></textarea>
 
-        <!-- Voice Selection -->
-        <div class="mt-4">
-            <label for="voiceSelect" class="block text-sm font-medium text-gray-700 mb-2">
-                Select Voice
+        <!-- language selection -->
+         <!-- <div class="mt-4">
+            <label 
+                for="languageSelect"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                >Select Language</label>
+
+            <select
+                id="languageSelect"
+                class="w-full p-3 border border-gray-300 rounded-lg
+                focus:outline-none focus:ring-2 focus:ring-blue-500"
+            ></select>
+         </div> -->
+
+        <!-- voice selection -->
+         <div class="mt-4">
+            <label
+                for="voiceSelect"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                >Select Voice
             </label>
+
             <select 
                 id="voiceSelect"
                 class="w-full p-3 border border-gray-300 rounded-lg
                 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option value="default">Default Voice</option>
-            </select>
-        </div>
 
-        <!-- Play Button -->
-        <button 
+                <option value="default">Default Voice</option>
+                <option value="voice1">Voice 1</option>
+                <option value="voice1">Voice 2</option>      
+            </select>
+         </div>
+
+         <!-- play button -->
+          <button 
             class="mt-6 w-full bg-blue-500 hover:bg-blue-600 text-white
             font-medium py-3 rounded-lg focus:outline-none focus:ring-2
             focus:ring-blue-500"
             id="playButton">
             Play Text
         </button>
-
-        <!-- Audio Player & Download Link -->
-        <div class="mt-4">
-            <audio id="audioPlayer" controls class="w-full"></audio>
-            <a id="downloadButton" class="mt-2 block text-center bg-green-500 text-white py-2 rounded-lg disabled:opacity-50"
-               disabled>Download Audio</a>
-        </div>
     </div>
 <script src="script.js"></script>
 </body>
