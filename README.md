@@ -24,7 +24,7 @@ open index.html
 <hr>
 
 ## 📸 Screenshots
-
+![home-1](https://github.com/user-attachments/assets/f706f227-fc01-45a3-8a5b-248b3b87d185)
 
 <hr>
 <h3 align="center">
