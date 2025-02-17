@@ -16,7 +16,6 @@ function loadVoices() {
 speechSynthesis.onvoiceschanged = loadVoices;
 loadVoices();
 
-// Function to generate speech and record it
 playButton.addEventListener('click', () => {
     if (!textInput.value.trim()) {
         alert("Please enter some text to convert to speech.");
@@ -25,34 +24,37 @@ playButton.addEventListener('click', () => {
 
     const utterance = new SpeechSynthesisUtterance(textInput.value);
     const selectedVoice = voices[voiceSelect.value];
-
+    
     if (selectedVoice) {
         utterance.voice = selectedVoice;
     }
 
-    // Use MediaRecorder API to capture audio
-    navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
-        const mediaRecorder = new MediaRecorder(stream);
-        let audioChunks = [];
+    // Use Web Audio API to capture speech synthesis output
+    const audioContext = new AudioContext();
+    const dest = audioContext.createMediaStreamDestination();
+    const source = audioContext.createMediaStreamSource(dest.stream);
+    source.connect(audioContext.destination);
 
-        mediaRecorder.ondataavailable = (event) => {
-            audioChunks.push(event.data);
-        };
+    const mediaRecorder = new MediaRecorder(dest.stream);
+    let audioChunks = [];
 
-        mediaRecorder.onstop = () => {
-            const audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
-            const audioURL = URL.createObjectURL(audioBlob);
-            audioPlayer.src = audioURL;
-            downloadButton.href = audioURL;
-            downloadButton.download = 'speech.mp3';
-            downloadButton.disabled = false;
-        };
+    mediaRecorder.ondataavailable = (event) => {
+        audioChunks.push(event.data);
+    };
 
-        mediaRecorder.start();
-        speechSynthesis.speak(utterance);
+    mediaRecorder.onstop = () => {
+        const audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
+        const audioURL = URL.createObjectURL(audioBlob);
+        audioPlayer.src = audioURL;
+        downloadButton.href = audioURL;
+        downloadButton.download = 'speech.mp3';
+        downloadButton.disabled = false;
+    };
 
-        utterance.onend = () => {
-            mediaRecorder.stop();
-        };
-    });
+    mediaRecorder.start();
+    speechSynthesis.speak(utterance);
+
+    utterance.onend = () => {
+        mediaRecorder.stop();
+    };
 });
