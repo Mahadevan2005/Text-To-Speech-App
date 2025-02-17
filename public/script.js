@@ -5,6 +5,8 @@ const downloadButton = document.querySelector('#downloadButton');
 const audioPlayer = document.querySelector('#audioPlayer');
 
 let voices = [];
+
+// Load available voices
 function loadVoices() {
     voices = speechSynthesis.getVoices();
     voiceSelect.innerHTML = voices
@@ -14,28 +16,29 @@ function loadVoices() {
 speechSynthesis.onvoiceschanged = loadVoices;
 loadVoices();
 
-let mediaRecorder;
-let audioChunks = [];
-
-// Play TTS and record audio
+// Function to generate speech and record it
 playButton.addEventListener('click', () => {
+    if (!textInput.value.trim()) {
+        alert("Please enter some text to convert to speech.");
+        return;
+    }
+
     const utterance = new SpeechSynthesisUtterance(textInput.value);
     const selectedVoice = voices[voiceSelect.value];
+
     if (selectedVoice) {
         utterance.voice = selectedVoice;
     }
 
-    // Capture audio using MediaRecorder
+    // Use MediaRecorder API to capture audio
     navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
-        const audioContext = new AudioContext();
-        const dest = audioContext.createMediaStreamDestination();
-        const source = audioContext.createMediaStreamSource(dest.stream);
-        source.connect(audioContext.destination);
+        const mediaRecorder = new MediaRecorder(stream);
+        let audioChunks = [];
 
-        mediaRecorder = new MediaRecorder(dest.stream);
         mediaRecorder.ondataavailable = (event) => {
             audioChunks.push(event.data);
         };
+
         mediaRecorder.onstop = () => {
             const audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
             const audioURL = URL.createObjectURL(audioBlob);
