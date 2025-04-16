@@ -1,32 +1,24 @@
-# Text To Speech App
-An app that enables users to effortlessly convert their texts into voices.
+# gamer
 
-## 💻 Built with
-- **HTML**: For structuring web pages.
-- **TailwindCSS**: Styles web pages.
-- **JavaScript**: Builds dynamic, reactive user interfaces.
-- **SpeechSynthesisUtterance**: Web speech API, representing a speech request.
+## Description
+Approved
 
-## ⚙️ Installation Steps
+## Features
+/
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/Mahadevan2005/Text-To-Speech-App.git
-```
+## Tech Stack
+- n
 
-### 2. Open the HTML file
-```bash
-open index.html
-```
+## Installation
+To install the project, follow the instructions below:
+- nn
 
+## Usage
+You can use this project to kk.
 
-🌟 You are all set!
-<hr>
+## Achievements
+I'm proud of:
+- hh
 
-## 📸 Screenshots
-![home-1](https://github.com/user-attachments/assets/f706f227-fc01-45a3-8a5b-248b3b87d185)
-
-<hr>
-<h3 align="center">
-Thank You ❤️
-</h3>
+## License
+This project is licensed under the **09** license.
